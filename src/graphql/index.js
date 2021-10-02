@@ -37,10 +37,25 @@ export const ADD_TAREFAS = gql`
 `;
 
 export const EDIT_TAREFAS = gql`
-  mutation editarTarefas($id: String, $assunto: String, $descricao: String) {
+  mutation editarTarefas(
+    $id: String
+    $assunto: String
+    $descricao: String
+    $idUser: Integer
+    $name: String
+    $avatar_url: String
+  ) {
     editarTarefas(
       id: $id
-      input: { fields: { assunto: $assunto, descricao: $descricao } }
+      input: {
+        fields: {
+          assunto: $assunto
+          descricao: $descricao
+          idUser: $idUser
+          avatar_url: $avatar_url
+          name: $name
+        }
+      }
     ) @rest(path: "tarefas/{args.id}", method: "PUT") {
       NoResponse
     }

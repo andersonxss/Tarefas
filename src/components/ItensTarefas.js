@@ -9,6 +9,7 @@ import {
   Avatar,
   Typography,
   CardActions,
+  Tooltip,
 } from "@material-ui/core";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import EditIcon from "@material-ui/icons/Edit";
@@ -28,7 +29,16 @@ function ItensTarefas(props) {
           disableTypography={true}
           size="small"
           style={{ backgroundColor: "#3f51b5" }}
-          title={<Button style={{ color: "white" }}>{data.fields.name}</Button>}
+          title={
+            <Tooltip title="Editar" placement="top">
+              <Button
+                style={{ color: "white" }}
+                onClick={() => form.HandleEditForm(data)}
+              >
+                {data.fields.name}
+              </Button>
+            </Tooltip>
+          }
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -39,22 +49,26 @@ function ItensTarefas(props) {
           </Typography>
         </CardContent>
         <CardActions>
-          <IconButton
-            disabled={dadosUser.idUser != data.fields.idUser}
-            size="small"
-            aria-label="settings"
-            onClick={() => form.HandleRemoverItens(data.id)}
-          >
-            <HighlightOffIcon />
-          </IconButton>
-          <IconButton
-            disabled={dadosUser.idUser != data.fields.idUser}
-            size="small"
-            aria-label="settings"
-            onClick={() => form.HandleEditForm(data)}
-          >
-            <EditIcon />
-          </IconButton>
+          <Tooltip title="Excluir" placement="top">
+            <IconButton
+              disabled={dadosUser.idUser != data.fields.idUser}
+              size="small"
+              aria-label="settings"
+              onClick={() => form.HandleRemoverItens(data.id)}
+            >
+              <HighlightOffIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Editar" placement="top">
+            <IconButton
+              disabled={dadosUser.idUser != data.fields.idUser}
+              size="small"
+              aria-label="settings"
+              onClick={() => form.HandleEditForm(data)}
+            >
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
         </CardActions>
       </Card>
     </Box>

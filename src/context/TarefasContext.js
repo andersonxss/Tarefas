@@ -40,6 +40,9 @@ export default function TarefasContextProvider({ children }) {
 
   const onSubmit = (data) => {
     setLoadForm(true);
+    data.idUser = dadosUser.idUser;
+    data.name = dadosUser.name;
+    data.avatar_url = dadosUser.avatar_url;
     let response;
     if (data.id) {
       response = editarTarefas({
@@ -47,9 +50,6 @@ export default function TarefasContextProvider({ children }) {
         refetchQueries: [{ query: GET_TAREFAS }],
       });
     } else {
-      data.idUser = dadosUser.idUser;
-      data.name = dadosUser.name;
-      data.avatar_url = dadosUser.avatar_url;
       response = criarTarefas({
         variables: data,
       });
