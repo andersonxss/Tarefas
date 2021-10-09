@@ -29,6 +29,7 @@ const cacheCreate = {
 
 export default function TarefasContextProvider({ children }) {
   const [loadForm, setLoadForm] = useState(false);
+  const [open, setOpen] = useState(false);
   const { data, loading } = useQuery(GET_TAREFAS);
   const [criarTarefas] = useMutation(ADD_TAREFAS, cacheCreate);
   const [editarTarefas] = useMutation(EDIT_TAREFAS);
@@ -57,17 +58,27 @@ export default function TarefasContextProvider({ children }) {
 
     response.then(() => {
       setLoadForm(false);
+      setOpen(false);
       reset({});
       setValue("id", "");
     });
   };
 
   const HandleEditForm = (data) => {
+    setOpen(true);
     setFocus("assunto");
     setFocus("descricao");
     setValue("id", data.id);
     setValue("assunto", data.fields.assunto);
     setValue("descricao", data.fields.descricao);
+  };
+
+  const HandleLimparForm = () => {
+    setFocus("assunto");
+    setFocus("descricao");
+    setValue("id", "");
+    setValue("assunto", "");
+    setValue("descricao", "");
   };
 
   const HandleRemoverItens = (id) => {
@@ -78,6 +89,10 @@ export default function TarefasContextProvider({ children }) {
     }).then(() => {
       setLoadForm(false);
     });
+  };
+
+  const openDialog = () => {
+    setOpen(open ? false : true);
   };
 
   return (
@@ -95,7 +110,10 @@ export default function TarefasContextProvider({ children }) {
           handleSubmit,
           HandleRemoverItens,
           HandleEditForm,
+          HandleLimparForm,
           reset,
+          open,
+          openDialog,
           formState,
           loadForm,
         },

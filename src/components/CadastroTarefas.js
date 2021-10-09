@@ -2,40 +2,41 @@ import React from "react";
 import {
   TextField,
   makeStyles,
-  Card,
-  CardActions,
-  CardContent,
+  Box,
   Grid,
   Typography,
   Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  IconButton,
 } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import { useTarefasContext } from "../context/TarefasContext";
-import BackdropLoader from "./Backdrop ";
-const useStyles = makeStyles({
-  root: {
-    marginTop: 20,
-  },
-  media: {
-    height: 140,
-  },
-});
 
-export default function CadastroTarefas() {
-  const classes = useStyles();
+export default function CadastroTarefas(props) {
   const { form } = useTarefasContext();
 
   return (
-    <Card className={classes.root}>
-      {form.loadForm && <BackdropLoader />}
-      <form onSubmit={form.handleSubmit(form.onSubmit)}>
-        <input type="hidden" {...form.register("id")} />
-        <CardContent>
+    <Dialog
+      open={form.open}
+      keepMounted
+      onClose={form.open}
+      aria-labelledby="alert-dialog-slide-title"
+      aria-describedby="alert-dialog-slide-description"
+    >
+      <DialogTitle id="customized-dialog-title">
+        <Box display="flex" alignItems="center" justifyContent="space-between">
+          <Typography>Criar Tarefas</Typography>
+          <IconButton aria-label="close" onClick={() => form.openDialog()}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+      </DialogTitle>
+      <DialogContent>
+        <form onSubmit={form.handleSubmit(form.onSubmit)}>
+          <input type="hidden" {...form.register("id")} />
           <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography component="h5" variant="h5">
-                Criar Tarefas
-              </Typography>
-            </Grid>
             <Grid item xs={12}>
               <TextField
                 id="outlined-multiline-flexible"
@@ -85,21 +86,31 @@ export default function CadastroTarefas() {
                 }
               />
             </Grid>
+            <Grid item xs={12} sm={6}>
+              <Button
+                type="button"
+                variant="contained"
+                color="primary"
+                fullWidth
+                onClick={() => form.HandleLimparForm()}
+              >
+                Limpar
+              </Button>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+                disabled={form.loadForm}
+              >
+                {form.loadForm ? "Enviando..." : "Enviar"}
+              </Button>
+            </Grid>
           </Grid>
-        </CardContent>
-
-        <CardActions>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            disabled={form.loadForm}
-          >
-            {form.loadForm ? "Enviando..." : "Enviar"}
-          </Button>
-        </CardActions>
-      </form>
-    </Card>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 }

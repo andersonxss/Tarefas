@@ -10,7 +10,7 @@ function ListarTarefas() {
   const lista = itens.records;
   if (loading) return <Loader />;
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={2}>
       {lista.map((elem, i) => {
         return (
           <Grid item xs={12} sm={6}>

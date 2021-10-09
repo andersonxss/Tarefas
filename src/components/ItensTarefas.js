@@ -5,7 +5,6 @@ import {
   CardContent,
   Box,
   IconButton,
-  Button,
   Avatar,
   Typography,
   CardActions,
@@ -30,14 +29,9 @@ function ItensTarefas(props) {
           size="small"
           style={{ backgroundColor: "#3f51b5" }}
           title={
-            <Tooltip title="Editar" placement="top">
-              <Button
-                style={{ color: "white" }}
-                onClick={() => form.HandleEditForm(data)}
-              >
-                {data.fields.name}
-              </Button>
-            </Tooltip>
+            <Typography variant="h6" component="h2" style={{ color: "white" }}>
+              {data.fields.name}
+            </Typography>
           }
         />
         <CardContent>
