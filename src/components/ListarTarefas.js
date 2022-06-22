@@ -13,7 +13,7 @@ function ListarTarefas() {
     <Grid container spacing={2}>
       {lista.map((elem, i) => {
         return (
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={6} key={i}>
             <ItensTarefas data={elem} />
           </Grid>
         );

@@ -1,12 +1,5 @@
-import React, { useState } from "react";
-import {
-  makeStyles,
-  Container,
-  Grid,
-  Box,
-  Tooltip,
-  Fab,
-} from "@material-ui/core";
+import React from "react";
+import { makeStyles, Container, Box, Tooltip, Fab } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Header from "../components/Header";
 import CadastroTarefas from "../components/CadastroTarefas";
@@ -23,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Home() {
   const classes = useStyles();
-
   const { form } = useTarefasContext();
 
   return (
@@ -38,7 +30,8 @@ function Home() {
           </Tooltip>
         </Box>
         <ListarTarefas />
-        <CadastroTarefas openDialog={form.openDialog} open={form.open} />
+        {form.open && <CadastroTarefas />}
+
         {form.loadForm && <BackdropLoader />}
       </Container>
     </div>

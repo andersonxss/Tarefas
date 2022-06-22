@@ -13,6 +13,7 @@ export default function LoginContextProvider({ children }) {
   useEffect(() => {
     handleDadosUser();
     isAuthenticated();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit = async (values) => {

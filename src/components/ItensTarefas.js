@@ -21,7 +21,7 @@ function ItensTarefas(props) {
   const { dadosUser } = useLoginContext();
 
   return (
-    <Box mt={4} key={data.id}>
+    <Box mt={4}>
       <Card>
         <CardHeader
           avatar={<Avatar alt="Remy Sharp" src={data.fields.avatar_url} />}
@@ -45,7 +45,7 @@ function ItensTarefas(props) {
         <CardActions>
           <Tooltip title="Excluir" placement="top">
             <IconButton
-              disabled={dadosUser.idUser != data.fields.idUser}
+              disabled={dadosUser.idUser !== data.fields.idUser}
               size="small"
               aria-label="settings"
               onClick={() => form.HandleRemoverItens(data.id)}
@@ -55,7 +55,7 @@ function ItensTarefas(props) {
           </Tooltip>
           <Tooltip title="Editar" placement="top">
             <IconButton
-              disabled={dadosUser.idUser != data.fields.idUser}
+              disabled={dadosUser.idUser !== data.fields.idUser}
               size="small"
               aria-label="settings"
               onClick={() => form.HandleEditForm(data)}

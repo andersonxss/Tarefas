@@ -1,7 +1,6 @@
 import React from "react";
 import {
   TextField,
-  makeStyles,
   Box,
   Grid,
   Typography,
@@ -14,21 +13,20 @@ import {
 import CloseIcon from "@material-ui/icons/Close";
 import { useTarefasContext } from "../context/TarefasContext";
 
-export default function CadastroTarefas(props) {
+export default function CadastroTarefas() {
   const { form } = useTarefasContext();
 
   return (
     <Dialog
       open={form.open}
       keepMounted
-      onClose={form.open}
       aria-labelledby="alert-dialog-slide-title"
       aria-describedby="alert-dialog-slide-description"
     >
       <DialogTitle id="customized-dialog-title">
         <Box display="flex" alignItems="center" justifyContent="space-between">
           <Typography>Criar Tarefas</Typography>
-          <IconButton aria-label="close" onClick={() => form.openDialog()}>
+          <IconButton aria-label="close" onClick={() => form.closeDialog()}>
             <CloseIcon />
           </IconButton>
         </Box>
@@ -86,17 +84,7 @@ export default function CadastroTarefas(props) {
                 }
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <Button
-                type="button"
-                variant="contained"
-                color="primary"
-                fullWidth
-                onClick={() => form.HandleLimparForm()}
-              >
-                Limpar
-              </Button>
-            </Grid>
+            <Grid item xs={12} sm={6}></Grid>
             <Grid item xs={12} sm={6}>
               <Button
                 type="submit"
